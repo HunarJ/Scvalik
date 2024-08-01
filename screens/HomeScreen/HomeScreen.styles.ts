@@ -8,14 +8,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     marginBottom: 20,
+    borderRadius: 16,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
   },
+  text: {
+    fontSize: 16,
+  }
 });
 
 export default styles;
