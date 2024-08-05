@@ -8,11 +8,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginVertical: 10,
-    width: '100%',
+    // width: '100%',
   },
   buttonText: {
     color: colors.white,
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
   },
 });

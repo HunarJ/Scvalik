@@ -5,4 +5,7 @@ export type RootStackParamList = {
   'Profil': undefined;
   'Tréninky': undefined;
   'Historie': undefined;
+  'WorkoutDetailScreen': { workoutId: string };
+  'Private': undefined;
+  'Public': undefined
 };

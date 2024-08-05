@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from '@react-navigation/stack';
 import { RootStackParamList } from '../types/types';
 import { Ionicons } from "@expo/vector-icons";
 import AuthContext from '../contexts/AuthContext';
@@ -11,9 +12,12 @@ import RegistrationScreen from "../screens/Auth/RegistrationScreen";
 import ProfileScreen from '../screens/ProfileScreen';
 
 import colors from "../constants/colors";
+import WorkoutsScreen from '../screens/WorkoutsScreen';
+import WorkoutDetailScreen from '../screens/WorkoutDetailScreen';
 
 const PublicTab = createBottomTabNavigator<RootStackParamList>();
 const PrivateTab = createBottomTabNavigator<RootStackParamList>();
+const Stack = createStackNavigator<RootStackParamList>();
 
 const PublicNavigator = () => (
   <PublicTab.Navigator
@@ -34,11 +38,11 @@ const PublicNavigator = () => (
       headerStyle: {
         backgroundColor: colors.primary,
       },
-      headerTintColor: colors.lightText,
+      headerTintColor: colors.white,
       tabBarStyle: {
         backgroundColor: colors.primary,
       },
-      tabBarActiveTintColor: colors.lightText,
+      tabBarActiveTintColor: colors.white,
       tabBarInactiveTintColor: colors.secondary,
     })}
   >
@@ -67,15 +71,16 @@ const PrivateNavigator = () => (
       headerStyle: {
         backgroundColor: colors.primary,
       },
-      headerTintColor: colors.lightText,
+      headerTintColor: colors.white,
       tabBarStyle: {
         backgroundColor: colors.primary,
       },
-      tabBarActiveTintColor: colors.lightText,
+      tabBarActiveTintColor: colors.white,
       tabBarInactiveTintColor: colors.secondary,
     })}
   >
-    <PrivateTab.Screen name="Profil" component={ProfileScreen} />
+    <PrivateTab.Screen name="Tréninky" component={WorkoutsScreen} />
+    <PrivateTab.Screen name="Profil" component={ProfileScreen} /> 
     {/* <PrivateTab.Screen name="Tréninky" component={HomeScreen} />
     <PrivateTab.Screen name="Historie" component={HomeScreen} /> */}
   </PrivateTab.Navigator>
@@ -86,7 +91,16 @@ const AppNavigator = () => {
 
   return (
     <NavigationContainer>
-      {isAuthenticated ? <PrivateNavigator /> : <PublicNavigator />}
+      <Stack.Navigator>
+        {isAuthenticated ? (
+          <>
+            <Stack.Screen name="Private" component={PrivateNavigator} options={{ headerShown: false }} />
+            <Stack.Screen name="WorkoutDetailScreen" component={WorkoutDetailScreen} />
+          </>
+        ) : (
+          <Stack.Screen name="Public" component={PublicNavigator} options={{ headerShown: false }} />
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
